@@ -58,6 +58,7 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
     mainFrame.setLocationRelativeTo(null);
     mainFrame.setVisible(true);
 
+
   }
 
   public void actionPerformed(ActionEvent evt) {
@@ -87,6 +88,10 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
 
   public void origin(){  }
 
+  public void paintComponent(Graphics g){
+
+  super.paintComponent(g);
+  }
   public Dimension getPreferredSize() {
     return new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
   }
