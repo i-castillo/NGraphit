@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class NGraphitGraphPane extends JPanel {
 
-  private static JScrollPane pane;
+  
   private static int lineSpacing = 40;
   public NGraphitGraphPane(){
     this.addMouseMotionListener(new MouseHandler());
