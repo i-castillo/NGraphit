@@ -42,9 +42,24 @@ public class NGraphitGraphPane extends JPanel {
       g2.drawString("AMRI AND ISAAC \u00a9", 10, 20);
 
       
-  //    drawGreyLines(g2);
+     drawGreyLinesV2(g2);
     }
 
+  public void drawGreyLinesV2(Graphics2D g2){
+    g2.setColor(Color.LIGHT_GRAY);
+
+    for(int i = 0; i < getWidth(); i+=lineSpacing){
+
+    g2.drawLine(i, 0, i, getHeight());
+
+    }
+    
+    for(int i = 0; i < getHeight(); i+= lineSpacing){
+
+    g2.drawLine(0, i, getWidth(), i);
+    }
+     
+  }
   public synchronized void drawGreyLines(Graphics2D g2) {
 
 

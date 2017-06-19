@@ -19,11 +19,6 @@ public class NGraphitDisplay implements ActionListener{
   private static final String RESET_STRING = "Resetit!";
   private static final String ORIGIN_STRING = "Origin!";
 
-  private static NGraphitGraphPane graph;
-  private static JPanel bottomPanel;
-  private static JButton graphBtn;
-  private static JButton resetBtn;
-
 
   /* END NEW AGE CONSTANTS */
   public static void addComponents(Container pane){
@@ -35,15 +30,29 @@ public class NGraphitDisplay implements ActionListener{
 
     JScrollPane scroll = new JScrollPane(new NGraphitGraphPane());
     pane.add(scroll, BorderLayout.CENTER);
-    
+    scroll.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+
+
     JPanel bottomPanel = new JPanel();
     pane.add(bottomPanel, BorderLayout.SOUTH);
 
-    graphBtn = new JButton(GRAPH_STRING);
-    resetBtn = new JButton(RESET_STRING);
+    JButton graphBtn = new JButton(GRAPH_STRING);
+    JButton resetBtn = new JButton(RESET_STRING);
+    JButton originBtn = new JButton(ORIGIN_STRING);
+
 
     bottomPanel.add(graphBtn);
     bottomPanel.add(resetBtn);
+
+    Rectangle bounds = scroll.getViewport().getViewRect();
+
+
+    Dimension size = scroll.getViewport().getViewSize();
+
+    
+    int x = (size.width - bounds.width) / 2 - CANVAS_WIDTH / 2;
+    int y = (size.height - bounds.height) / 2 - CANVAS_HEIGHT / 2;
+    scroll.getViewport().setViewPosition(new Point(x, y));
 
 
   }
@@ -53,8 +62,7 @@ public class NGraphitDisplay implements ActionListener{
     JFrame mainFrame = new JFrame(PROGRAM_NAME);
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
-    addComponents(mainFrame);
-   // mainFrame.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
+    addComponents(mainFrame);  
 
     mainFrame.pack();
     mainFrame.setLocationRelativeTo(null);
@@ -87,7 +95,9 @@ public class NGraphitDisplay implements ActionListener{
 
   public void reset(){  }
 
-  public void origin(){  }
+  public void origin(){ 
+    System.out.println("Origin call");
+  }
 
 
   public Dimension getPreferredSize() {
