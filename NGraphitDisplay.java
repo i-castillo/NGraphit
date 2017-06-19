@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.util.Arrays;
 
 
-public class NGraphitDisplay extends JPanel implements ActionListener{
+public class NGraphitDisplay implements ActionListener{
 
   /* NEW AGE CONSTANTS */
   private static final int CANVAS_WIDTH = 600;
@@ -26,40 +26,39 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
 
 
   /* END NEW AGE CONSTANTS */
-  public NGraphitDisplay(){
-    this.addMouseMotionListener(new MouseHandler());
-    this.addMouseListener(new MouseHandler());
+  public static void addComponents(Container pane){
+
+    if (!(pane.getLayout() instanceof BorderLayout)) {
+      pane.add(new JLabel("Container doesn't use BorderLayout!"));
+      return;
+    }
+
+    JScrollPane scroll = new JScrollPane(new NGraphitGraphPane());
+    pane.add(scroll, BorderLayout.CENTER);
+    
+    JPanel bottomPanel = new JPanel();
+    pane.add(bottomPanel, BorderLayout.SOUTH);
 
     graphBtn = new JButton(GRAPH_STRING);
     resetBtn = new JButton(RESET_STRING);
 
-    this.add(graphBtn);
-    this.add(resetBtn);
+    bottomPanel.add(graphBtn);
+    bottomPanel.add(resetBtn);
 
-    graphBtn.addActionListener(this);
-    resetBtn.addActionListener(this);
+
   }
-
   public static void createAndShowGUI(){
 
     //the main graph frame
     JFrame mainFrame = new JFrame(PROGRAM_NAME);
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
+    addComponents(mainFrame);
+   // mainFrame.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    NGraphitDisplay display = new NGraphitDisplay();
-
-    graph = new NGraphitGraphPane();
-
-    mainFrame.add(display);
-
-    bottomPanel = new JPanel();
-    display.add(graph);
-    display.add(bottomPanel);
     mainFrame.pack();
     mainFrame.setLocationRelativeTo(null);
     mainFrame.setVisible(true);
-
 
   }
 
@@ -90,10 +89,7 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
 
   public void origin(){  }
 
-  public void paintComponent(Graphics g){
 
-  super.paintComponent(g);
-  }
   public Dimension getPreferredSize() {
     return new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
   }
@@ -105,7 +101,7 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
     public void keyPressed(KeyEvent ke) {    }
     public void keyReleased(KeyEvent ke) {    }
 
-    }
+  }
 
   private class MouseHandler implements MouseMotionListener, MouseListener {
     public void mouseDragged(MouseEvent evt) {   }
