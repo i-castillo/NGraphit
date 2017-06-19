@@ -48,9 +48,11 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
     mainFrame.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
     NGraphitDisplay display = new NGraphitDisplay();
-    mainFrame.add(display);
 
     graph = new NGraphitGraphPane();
+
+    mainFrame.add(display);
+
     bottomPanel = new JPanel();
     display.add(graph);
     display.add(bottomPanel);
@@ -106,7 +108,8 @@ public class NGraphitDisplay extends JPanel implements ActionListener{
     }
 
   private class MouseHandler implements MouseMotionListener, MouseListener {
-    public void mouseDragged(MouseEvent evt) {    }
+    public void mouseDragged(MouseEvent evt) {   }
+
     public void mouseMoved(MouseEvent evt){    }
     public void mouseClicked(MouseEvent evt){    }
     public void mouseEntered(MouseEvent evt){    }
