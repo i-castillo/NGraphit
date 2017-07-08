@@ -10,11 +10,12 @@ import java.lang.Character;
 
 public class NGraphitUtils{
 
+  private static final String[] operations = {"log", "cos", "sin", "tan" };
   public NGraphitFunction parseString(String inputString){
 
     inputString = inputString.replaceAll("\\s+","").toLowerCase();
 
-    
+
     if(!checkParentheses(inputString)){
       System.out.println("parens error");
       return null;
@@ -25,10 +26,10 @@ public class NGraphitUtils{
       return null;
     }
 
-    if(getLetters(inputString) == null){
+ /*   if(getLetters(inputString) == null){
       System.out.println("two many letters error");
       return null;
-    }
+    } */
 
     if(!inputString.contains("=")){
       System.out.println("missing =");
@@ -44,6 +45,29 @@ public class NGraphitUtils{
 
   }
 
+
+/**
+  private int getCoeff(String string){
+    int i;
+    int coeff;
+    if(Character.isNumeric(string.charAt(i))){
+      return 0;
+    }
+    else{
+      coeff = Integer.parseInt(string.charAt(i));
+      int j = i+1;
+      while(Character.isNumeric(string.charAt(j))){
+        coeff = 10 * Integer.parseInt(string.charAt(j)) + coeff;
+
+      }
+      i = j;
+
+    }
+    return coeff;
+  } */
+
+
+  
 
 
   private boolean checkParentheses(String inputString){
@@ -73,17 +97,19 @@ public class NGraphitUtils{
 
   }
 
-  private ArrayList<Character> getLetters(String input){
+ /* private ArrayList<Character> getLetters(String input){
 
-
-
+  //  String temp = new String(input);
+    for(String str: operations){
+      temp.replace(str, 1);
+    }
     ArrayList<Character> chars = new ArrayList<>();
     for(int i = 0; i < input.length(); i++){
       if(Character.isLetter(input.charAt(i))){
         if(!chars.contains(input.charAt(i))){
 
-       
-        chars.add(input.charAt(i));
+
+          chars.add(input.charAt(i));
         }
         if(chars.size() > 2){
           return null;
@@ -96,7 +122,7 @@ public class NGraphitUtils{
     return chars;
 
 
-  }
+  } */
 
 
 }
